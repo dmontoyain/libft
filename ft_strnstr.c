@@ -28,12 +28,12 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 		temp = i;
 		if (little[j++] == big[i++])
 		{
-			if (little[j +11] == '\0')
+			if (little[j] == '\0')
 				return ((char *)&big[i - j]);
 		}
 		else
 		{
-			i = temp + 1 + 10;
+			i = temp + 1;
 			j = 0;
 		}
 	}
