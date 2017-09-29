@@ -6,7 +6,7 @@
 /*   By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 21:50:02 by dmontoya          #+#    #+#             */
-/*   Updated: 2017/09/26 15:05:24 by dmontoya         ###   ########.fr       */
+/*   Updated: 2017/09/28 19:27:46 by dmontoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putnbr_fd(int nb, int fd)
 	char *ns;
 
 	if (nb == -2147483648)
-		ft_putstr_fd("-2147483647", fd);
+		ft_putstr_fd("-2147483648", fd);
 	else
 	{
 		ns = ft_itoa(nb);

@@ -6,7 +6,7 @@
 /*   By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 21:00:42 by dmontoya          #+#    #+#             */
-/*   Updated: 2017/09/28 11:13:10 by dmontoya         ###   ########.fr       */
+/*   Updated: 2017/09/28 19:25:54 by dmontoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,39 +30,39 @@ int		ft_intlen(int nb)
 	return (size + 1);
 }
 
-int		ft_isnegative(int nb, char *ns)
+void	ft_itostr(char *ns, int nb, int size, int is_neg)
 {
-	if (nb < 0)
+	ns[size] = '\0';
+	while (size--)
 	{
-		ns[0] = '-';
-		nb = -nb;
+		if (size == 0 && is_neg == 1)
+		{
+			ns[0] = '-';
+			break ;
+		}
+		ns[size] = nb % 10 + '0';
+		nb = nb / 10;
 	}
-	return (nb);
 }
 
 char	*ft_itoa(int nb)
 {
 	int		size;
 	char	*ns;
+	int		is_neg;
 
+	is_neg = 0;
+	if (nb == -2147483648)
+		return (ft_strdup("-2147483648"));
 	size = ft_intlen(nb);
 	ns = (char *)malloc(sizeof(char) * (size + 1));
-	if (ns == NULL)
+	if (ns == 0)
 		return (0);
-	if (nb <= -2147483648)
-	{
-		ns = ft_strcpy(ns, "-2147483648");
-		return (ns);
-	}
 	if (nb < 0)
-		nb = ft_isnegative(nb, ns);
-	ns[size + 1] = '\0';
-	while (size--)
 	{
-		if (ns[size] == '-')
-			break ;
-		ns[size] = nb % 10 + '0';
-		nb = nb / 10;
+		is_neg = 1;
+		nb = -nb;
 	}
+	ft_itostr(ns, nb, size, is_neg);
 	return (ns);
 }
