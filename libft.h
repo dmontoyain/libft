@@ -6,7 +6,7 @@
 /*   By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 19:50:01 by dmontoya          #+#    #+#             */
-/*   Updated: 2017/09/28 11:08:20 by dmontoya         ###   ########.fr       */
+/*   Updated: 2017/09/28 21:09:45 by dmontoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,8 @@ void				ft_memdel(void **ap);
 void				*ft_memalloc(size_t size);
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
 void				*ft_memmove(void *dest, const void *src, size_t len);
+t_list				*ft_lstnew(void const *content, size_t content_size);
+void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
+void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 
 #endif

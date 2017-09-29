@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+//#include "libft.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 int		ft_wordcount(const char *s, char c)
 {
@@ -23,12 +25,12 @@ int		ft_wordcount(const char *s, char c)
 	{
 		if (s[i] == c)
 			i++;
-		else if ((s[i] != c && i == 0) || (s[i] != c && s[i - 1] == c))
+		else if ((s[i] != c && s[i + 1] == c) || (s[i] != c && s[i + 1] == '\0'))
 		{
 			wc++;
 			i++;
 		}
-		else if (s[i] != c && s[i - 1] != c)
+		else if ((s[i] != c && i == 0) || (s[i] != c && s[i - 1] != c))
 			i++;
 	}
 	return (wc);
@@ -48,7 +50,7 @@ int		ft_mallocarray(char **as, char const *s, char c)
 		while (s[i] != c)
 		{
 			i++;
-			if (s[i] == c)
+			if (s[i] == c || (s[i] != '\0' && s[i - 1] != c))
 			{
 				as[temp] = (char *)malloc(sizeof(char) * (i - len + 1));
 				if (as[temp++] == 0)
@@ -75,16 +77,26 @@ char	**ft_strsplit(char const *s, char c)
 		return (0);
 	sa[wc] = 0;
 	ft_mallocarray(sa, s, c);
+	printf("%s\n", "here");
 	while (*s)
 	{
 		j = 0;
 		while (*s != c)
 		{
 			sa[i][j++] = *s++;
-			if (*s == c)
+			if (*s == c || *s == '\0')
 				sa[i++][j] = '\0';
+			if (*s == '\0')
+				break ;
 		}
 		s++;
 	}
+	printf("%s\n", sa[2]);
 	return (sa);
+}
+
+int main()
+{
+	ft_strsplit("  olo ", 'o');
+	return (0);
 }

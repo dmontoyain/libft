@@ -1,41 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/22 19:46:37 by dmontoya          #+#    #+#             */
-/*   Updated: 2017/09/28 10:55:30 by dmontoya         ###   ########.fr       */
+/*   Created: 2017/09/28 21:43:15 by dmontoya          #+#    #+#             */
+/*   Updated: 2017/09/28 21:43:18 by dmontoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+void    ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {
-	size_t i;
-	size_t j;
-	size_t temp;
-
-	temp = 0;
-	i = 0;
-	j = 0;
-	if (little[i] == '\0')
-		return ((char *)big);
-	while (len--)
-	{
-		temp = i;
-		if (little[j++] == big[i++])
-		{
-			if (little[j +11] == '\0')
-				return ((char *)&big[i - j]);
-		}
-		else
-		{
-			i = temp + 1 + 10;
-			j = 0;
-		}
-	}
-	return (0);
+    if (alst)
+    {
+        while (alst)
+        {
+            del((*alst)->content, (*alst)->content_size);
+            free (*alst);
+            *alst++ = 0;
+        }
+    }
 }
