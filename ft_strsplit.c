@@ -6,18 +6,16 @@
 /*   By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 15:48:31 by dmontoya          #+#    #+#             */
-/*   Updated: 2017/09/28 11:10:12 by dmontoya         ###   ########.fr       */
+/*   Updated: 2017/09/30 23:11:08 by dmontoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "libft.h"
 
-int		ft_wordcount(const char *s, char c)
+size_t		ft_wordcount(const char *s, char c)
 {
-	int wc;
-	int i;
+	size_t		wc;
+	size_t		i;
 
 	wc = 0;
 	i = 0;
@@ -25,32 +23,32 @@ int		ft_wordcount(const char *s, char c)
 	{
 		if (s[i] == c)
 			i++;
-		else if ((s[i] != c && s[i + 1] == c) || (s[i] != c && s[i + 1] == '\0'))
+		else if ((s[i] != c && i == 0) || (s[i] != c && s[i - 1] == c))
 		{
 			wc++;
 			i++;
 		}
-		else if ((s[i] != c && i == 0) || (s[i] != c && s[i - 1] != c))
+		else if (s[i] != c && s[i - 1] != c)
 			i++;
 	}
 	return (wc);
 }
 
-int		ft_mallocarray(char **as, char const *s, char c)
+int			ft_mallocarray(char **as, char const *s, char c)
 {
-	int i;
-	int temp;
-	int len;
+	size_t		i;
+	size_t		temp;
+	size_t		len;
 
 	temp = 0;
 	len = 0;
 	while (s[len] != '\0')
 	{
 		i = len;
-		while (s[i] != c)
+		while (s[i] != c && s[i] != '\0')
 		{
 			i++;
-			if (s[i] == c || (s[i] != '\0' && s[i - 1] != c))
+			if (s[i] == c || s[i] == '\0')
 			{
 				as[temp] = (char *)malloc(sizeof(char) * (i - len + 1));
 				if (as[temp++] == 0)
@@ -63,12 +61,12 @@ int		ft_mallocarray(char **as, char const *s, char c)
 	return (1);
 }
 
-char	**ft_strsplit(char const *s, char c)
+char		**ft_strsplit(char const *s, char c)
 {
-	char	**sa;
-	int		wc;
-	int		j;
-	int		i;
+	char		**sa;
+	size_t		wc;
+	size_t		j;
+	size_t		i;
 
 	i = 0;
 	wc = ft_wordcount(s, c);
@@ -77,26 +75,17 @@ char	**ft_strsplit(char const *s, char c)
 		return (0);
 	sa[wc] = 0;
 	ft_mallocarray(sa, s, c);
-	printf("%s\n", "here");
-	while (*s)
+	wc = 0;
+	while (s[wc] != '\0')
 	{
 		j = 0;
-		while (*s != c)
+		while (s[wc] != c && wc < ft_strlen(s))
 		{
-			sa[i][j++] = *s++;
-			if (*s == c || *s == '\0')
+			sa[i][j++] = s[wc++];
+			if (s[wc] == c || s[wc] == '\0')
 				sa[i++][j] = '\0';
-			if (*s == '\0')
-				break ;
 		}
-		s++;
+		wc++;
 	}
-	printf("%s\n", sa[2]);
 	return (sa);
-}
-
-int main()
-{
-	ft_strsplit("  olo ", 'o');
-	return (0);
 }
