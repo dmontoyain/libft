@@ -6,7 +6,7 @@
 /*   By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 20:43:30 by dmontoya          #+#    #+#             */
-/*   Updated: 2017/09/28 11:01:34 by dmontoya         ###   ########.fr       */
+/*   Updated: 2017/10/01 20:24:31 by dmontoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_putendl(char const *s)
 {
+	if (s == 0)
+		return ;
 	while (*s)
 		ft_putchar(*s++);
 	ft_putchar('\n');
