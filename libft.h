@@ -6,7 +6,7 @@
 /*   By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 19:50:01 by dmontoya          #+#    #+#             */
-/*   Updated: 2017/09/30 23:15:32 by dmontoya         ###   ########.fr       */
+/*   Updated: 2017/10/01 22:22:10 by dmontoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int					ft_tolower(int c);
 int					ft_toupper(int c);
 int					ft_isprint(int c);
 int					ft_isascii(int c);
-int					ft_islanum(int c);
+int					ft_isalnum(int c);
 int					ft_isdigit(int c);
 int					ft_isalpha(int c);
 int					ft_atoi(const char *str);
@@ -81,5 +81,6 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+int					ft_intlen(int nb);
 
 #endif

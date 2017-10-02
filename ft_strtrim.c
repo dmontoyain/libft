@@ -6,13 +6,13 @@
 /*   By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 02:32:34 by dmontoya          #+#    #+#             */
-/*   Updated: 2017/09/28 10:39:03 by dmontoya         ###   ########.fr       */
+/*   Updated: 2017/10/01 22:52:25 by dmontoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_locateend(char const *s, int len)
+static	int		ft_locateend(char const *s, int len)
 {
 	int	location;
 
@@ -27,7 +27,7 @@ int		ft_locateend(char const *s, int len)
 	return (location);
 }
 
-int		ft_locatestart(char const *s)
+static	int		ft_locatestart(char const *s)
 {
 	int	location;
 
@@ -43,7 +43,7 @@ int		ft_locatestart(char const *s)
 	return (location);
 }
 
-char	*ft_strtrim(char const *s)
+char			*ft_strtrim(char const *s)
 {
 	char	*ns;
 	int		tl;
@@ -52,6 +52,8 @@ char	*ft_strtrim(char const *s)
 	int		i;
 
 	i = 0;
+	if (s == 0)
+		return (0);
 	b = ft_locatestart(s);
 	len = ft_strlen(s);
 	if (len == b)

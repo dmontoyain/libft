@@ -6,13 +6,13 @@
 /*   By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 15:48:31 by dmontoya          #+#    #+#             */
-/*   Updated: 2017/09/30 23:11:08 by dmontoya         ###   ########.fr       */
+/*   Updated: 2017/10/01 23:06:11 by dmontoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_wordcount(const char *s, char c)
+static	size_t		ft_wordcount(const char *s, char c)
 {
 	size_t		wc;
 	size_t		i;
@@ -34,7 +34,7 @@ size_t		ft_wordcount(const char *s, char c)
 	return (wc);
 }
 
-int			ft_mallocarray(char **as, char const *s, char c)
+static	int			ft_mallocarray(char **as, char const *s, char c)
 {
 	size_t		i;
 	size_t		temp;
@@ -61,20 +61,13 @@ int			ft_mallocarray(char **as, char const *s, char c)
 	return (1);
 }
 
-char		**ft_strsplit(char const *s, char c)
+static	void		ft_fillarray(char const *s, char c, char **sa)
 {
-	char		**sa;
-	size_t		wc;
-	size_t		j;
-	size_t		i;
+	size_t i;
+	size_t j;
+	size_t wc;
 
 	i = 0;
-	wc = ft_wordcount(s, c);
-	sa = (char **)malloc(sizeof(char *) * (wc + 1));
-	if (sa == 0)
-		return (0);
-	sa[wc] = 0;
-	ft_mallocarray(sa, s, c);
 	wc = 0;
 	while (s[wc] != '\0')
 	{
@@ -87,5 +80,21 @@ char		**ft_strsplit(char const *s, char c)
 		}
 		wc++;
 	}
+}
+
+char				**ft_strsplit(char const *s, char c)
+{
+	char		**sa;
+	size_t		wc;
+
+	if (s == 0)
+		return (0);
+	wc = ft_wordcount(s, c);
+	sa = (char **)malloc(sizeof(char *) * (wc + 1));
+	if (sa == 0)
+		return (0);
+	sa[wc] = 0;
+	ft_mallocarray(sa, s, c);
+	ft_fillarray(s, c, sa);
 	return (sa);
 }

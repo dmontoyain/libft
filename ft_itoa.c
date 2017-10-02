@@ -6,31 +6,13 @@
 /*   By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 21:00:42 by dmontoya          #+#    #+#             */
-/*   Updated: 2017/09/28 19:25:54 by dmontoya         ###   ########.fr       */
+/*   Updated: 2017/10/01 22:24:02 by dmontoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_intlen(int nb)
-{
-	int		size;
-
-	size = 0;
-	if (nb < 0)
-	{
-		size++;
-		nb = -nb;
-	}
-	while (nb >= 10)
-	{
-		nb = nb / 10;
-		size++;
-	}
-	return (size + 1);
-}
-
-void	ft_itostr(char *ns, int nb, int size, int is_neg)
+static	void	ft_itostr(char *ns, int nb, int size, int is_neg)
 {
 	ns[size] = '\0';
 	while (size--)
@@ -45,7 +27,7 @@ void	ft_itostr(char *ns, int nb, int size, int is_neg)
 	}
 }
 
-char	*ft_itoa(int nb)
+char			*ft_itoa(int nb)
 {
 	int		size;
 	char	*ns;

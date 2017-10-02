@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_intlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/25 02:04:59 by dmontoya          #+#    #+#             */
-/*   Updated: 2017/10/01 22:51:28 by dmontoya         ###   ########.fr       */
+/*   Created: 2017/09/30 23:30:05 by dmontoya          #+#    #+#             */
+/*   Updated: 2017/10/01 22:25:04 by dmontoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int		ft_intlen(int nb)
 {
-	int		lt;
-	char	*ns;
-	int		i;
+	int		size;
 
-	i = 0;
-	if (s1 == 0 || s2 == 0)
-		return (0);
-	lt = ft_strlen(s1) + ft_strlen(s2) + 1;
-	ns = (char *)malloc(sizeof(char) * lt);
-	if (ns == 0)
-		return (0);
-	while (lt--)
+	size = 0;
+	if (nb < 0)
 	{
-		while (*s1)
-			ns[i++] = *s1++;
-		while (*s2)
-			ns[i++] = *s2++;
+		size++;
+		nb = -nb;
 	}
-	ns[i] = (char)0;
-	return (ns);
+	while (nb >= 10)
+	{
+		nb = nb / 10;
+		size++;
+	}
+	return (size + 1);
 }

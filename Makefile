@@ -6,7 +6,7 @@
 #    By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/22 20:24:48 by dmontoya          #+#    #+#              #
-#    Updated: 2017/09/26 16:37:22 by dmontoya         ###   ########.fr        #
+#    Updated: 2017/10/01 22:23:13 by dmontoya         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -64,10 +64,15 @@ FUNCTIONS = toupper \
 			memalloc \
 			memdel \
 			strlcat \
-			memmove
+			memmove \
+			lstnew \
+			lstdelone \
+			lstdel	\
+			lstadd \
+			lstiter \
+			lstmap \
+			intlen
 
-
-HEAD_FILES = ./
 ADD_FT = $(addprefix ft_, $(FUNCTIONS))
 C_FILES = $(addsuffix .c, $(ADD_FT))
 OBJ_FILES = $(addsuffix .o, $(ADD_FT))
@@ -79,8 +84,9 @@ INCL = ./includes/
 all: $(NAME)
 
 $(NAME):
-	$(CC) $(FLAGS) -c $(C_FILES) -I $(HEAD_FILES)
-	ar rcs $(NAME) $(OBJ_FILES)
+	$(CC) $(FLAGS) -c $(C_FILES)
+	ar rc $(NAME) $(OBJ_FILES)
+	ranlib $(NAME)
 
 clean:
 	rm -f $(OBJ_FILES)
