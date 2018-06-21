@@ -6,7 +6,7 @@
 #    By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/22 20:24:48 by dmontoya          #+#    #+#              #
-#    Updated: 2017/10/01 22:23:13 by dmontoya         ###   ########.fr        #
+#    Updated: 2018/03/06 23:17:50 by dmontoya         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -22,13 +22,15 @@ FUNCTIONS = toupper \
 			strcat \
 			strncat \
 			atoi \
+			wordcount \
+			strtohex \
+			atoi_base \
 			strncmp \
 			strcmp \
 			strnstr \
 			strstr \
 			strcpy \
 			strlen \
-			strcpy \
 			strncpy \
 			strdup \
 			strchr \
@@ -71,29 +73,57 @@ FUNCTIONS = toupper \
 			lstadd \
 			lstiter \
 			lstmap \
-			intlen
+			intlen \
+			get_next_line \
+			doublearray_del \
+			wcharlen \
+			wcstrlen \
+			uitoa_base \
+			itoa_base \
+			str_touppercase \
+			remove_nonascii \
+			strnjoin
+
+
+GREEN = \033[32m
+CYAN = \033[36m
+NO_COLOR=\033[0m
+
+PREP_STR = $(CYAN)Preparing C LIBFT...$(NO_COLOR)
+CLEANO_STR = $(CYAN)Cleaning object files...$(NO_COLOR)
+CLEANB_STR = $(CYAN)Cleaning binary files...$(NO_COLOR)
+OK_STR = $(GREEN)[OK]$(NO_COLOR)
+
 
 ADD_FT = $(addprefix ft_, $(FUNCTIONS))
-C_FILES = $(addsuffix .c, $(ADD_FT))
+C_FILES = $(addprefix src/, $(addsuffix .c, $(ADD_FT)))
 OBJ_FILES = $(addsuffix .o, $(ADD_FT))
-
+O_FILES = $(addprefix obj/, $(OBJ_FILES))
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
-INCL = ./includes/
+INCL = -I inc/
+
 
 all: $(NAME)
 
 $(NAME):
-	$(CC) $(FLAGS) -c $(C_FILES)
-	ar rc $(NAME) $(OBJ_FILES)
-	ranlib $(NAME)
+	@echo "$(PREP_STR)"
+	@$(CC) $(FLAGS) $(INCL) -c $(C_FILES)
+	@mkdir -p obj
+	@mv $(OBJ_FILES) obj/
+	@ar rcs $(NAME) $(O_FILES)
+	@echo "Library Complete! $(NAME)...$(OK_STR)"
 
 clean:
-	rm -f $(OBJ_FILES)
-	rm -f *~
+	@echo "$(CLEANO_STR)"
+	@rm -f $(O_FILES)
+	@echo "$(OK_STR)"
 
 fclean:	clean
-	rm -f $(NAME)
+	@echo "$(CLEANB_STR)"
+	@rm -f $(NAME)
+	@rm -rf obj/
+	@echo "$(OK_STR)"
 
 re: fclean all
 
